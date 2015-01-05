@@ -1,15 +1,14 @@
-<ul id="todo-list" class="unstyled">
-  <% @items.each do |item| %>
-  <li id="<%=item[:id]%>">
-    <span class="item">
-      <%= item[:done]? "<del>#{item[:content]}</del>": item[:content] %>
-    </span>
-    <span class="pull-right">
-      <a href="#" class="btn btn-primary"><%= item[:done] ? "Not done" : "Done"%></a>
-      <a href="/delete/<%= item[:id] %>" class="btn btn-danger">Delete</a>
-    </span>
-  </li>
-  <% end %>
-</ul>
-
-<a href="/new" class="btn btn-primary">Add todo item</a>
+<p>What's for dinner?</p>
+<form action='cast' method='post'>
+  <ul class='unstyled'>
+    <% Choices.each do |id, text| %>
+      <li>
+        <label class='radio'>
+          <input type='radio' name='vote' value='<%= id %>' />
+          <%= text %>
+        </label>
+      </li>
+    <% end %>
+  </ul>
+  <button type='submit' class='btn btn-primary'>Cast this vote!</button>
+</form>
