@@ -17,3 +17,18 @@ end
 # Create database.
 DataMapper.finalize.auto_upgrade!
 
+get '/' do
+  @items = Item.all(:order => :created.desc)
+  redirect '/new' if @items.empty?
+  erb :index
+end
+
+get '/new' do
+  @title = "Add todo item"
+  erb :new
+end
+
+post '/new' do
+  Item.create(:content => params[:content], :created => Time.now)
+  redirect '/'
+end
